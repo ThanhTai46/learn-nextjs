@@ -1,9 +1,11 @@
 import { useRouter } from "next/router";
-import React from "react";
 
-export interface PostDetailPageProps {}
+import { GetStaticPaths, GetStaticProps } from "next";
+import { GetStaticPropsContext } from "next";
 
-const PostDetailPage = (props: PostDetailPageProps) => {
+export interface PostDetailProps {}
+
+const PostDetailPage = (props: PostDetailProps) => {
   const router = useRouter();
   return (
     <div>
@@ -14,3 +16,29 @@ const PostDetailPage = (props: PostDetailPageProps) => {
 };
 
 export default PostDetailPage;
+export const getStaticPaths: GetStaticPaths = async () => {
+  return {
+    paths: [
+      {
+        params: { postId: 1 },
+      },
+      {
+        params: { postId: 2 },
+      },
+      {
+        params: { postId: 3 },
+      },
+    ],
+  };
+};
+export const getStaticProps: GetStaticProps<PostDetailProps> = async (
+  context: GetStaticPropsContext
+) => {
+  console.log("Get Static Props", context.params.postId);
+
+  return {
+    props: {
+      posts: data,
+    },
+  };
+};
