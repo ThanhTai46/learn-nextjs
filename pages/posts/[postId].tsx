@@ -20,21 +20,25 @@ export const getStaticPaths: GetStaticPaths = async () => {
   return {
     paths: [
       {
-        params: { postId: 1 },
+        params: { postId: "1" },
       },
       {
-        params: { postId: 2 },
+        params: { postId: "2" },
       },
       {
-        params: { postId: 3 },
+        params: { postId: "3" },
+      },
+      {
+        params: { postId: "4" },
       },
     ],
+    fallback: false,
   };
 };
 export const getStaticProps: GetStaticProps<PostDetailProps> = async (
   context: GetStaticPropsContext
 ) => {
-  console.log("Get Static Props", context.params.postId);
+  console.log("Get Static Props", context.params?.postId);
 
   return {
     props: {
